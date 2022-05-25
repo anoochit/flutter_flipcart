@@ -1,0 +1,22 @@
+{
+  "collectionName": "components_order_item_order_items",
+  "info": {
+    "displayName": "Order Item",
+    "icon": "ad",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "Price": {
+      "type": "decimal"
+    },
+    "product": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::product.product"
+    },
+    "Quantity": {
+      "type": "integer"
+    }
+  }
+}
