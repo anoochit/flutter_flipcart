@@ -12,10 +12,7 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "Date": {
-      "type": "datetime"
-    },
-    "Items": {
+    "items": {
       "type": "component",
       "repeatable": true,
       "component": "order-item.order-item"
