@@ -22,6 +22,7 @@ class HomeBody extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               // category
+              SizedBox(height: 8),
               Container(
                 width: constraints.maxWidth,
                 height: (120),

@@ -2,68 +2,110 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:frontend/controllers/product_controller.dart';
+import 'package:get/get.dart';
+
+import '../../models/mock_model.dart';
 
 class ProductDetailPage extends StatelessWidget {
-  const ProductDetailPage({Key? key}) : super(key: key);
+  ProductDetailPage({Key? key}) : super(key: key);
+
+  final product = Get.arguments as Product;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // show body under appbar
-      extendBodyBehindAppBar: true,
-      // show appbar
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        systemOverlayStyle: const SystemUiOverlayStyle(
-          statusBarColor: Colors.transparent,
-          statusBarIconBrightness: Brightness.dark,
+        // show body under appbar
+        extendBodyBehindAppBar: true,
+        // show appbar
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          systemOverlayStyle: const SystemUiOverlayStyle(
+            statusBarColor: Colors.transparent,
+            statusBarIconBrightness: Brightness.dark,
+          ),
         ),
-      ),
-      body: SingleChildScrollView(
-        child: LayoutBuilder(builder: (context, constraints) {
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // show image in page view
-              SizedBox(
-                width: constraints.maxWidth,
-                height: constraints.maxWidth,
-                child: PageView.builder(
-                  onPageChanged: ((value) {
-                    log('$value');
-                  }),
-                  scrollDirection: Axis.horizontal,
-                  itemCount: 4,
-                  itemBuilder: (context, index) {
-                    return const Placeholder();
-                  },
-                ),
-              ),
+        body: GetBuilder<ProductController>(
+            init: ProductController(),
+            builder: (controller) {
+              return SingleChildScrollView(
+                child: LayoutBuilder(builder: (context, constraints) {
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      // show image in page view
+                      Stack(
+                        children: [
+                          SizedBox(
+                            width: constraints.maxWidth,
+                            height: constraints.maxWidth,
+                            child: PageView.builder(
+                              onPageChanged: ((value) {
+                                controller.currentPageIndex = value;
+                                controller.update();
+                              }),
+                              scrollDirection: Axis.horizontal,
+                              itemCount: product.imageUrls.length,
+                              itemBuilder: (context, index) {
+                                return Image.network(product.imageUrls[index]);
+                              },
+                            ),
+                          ),
+                          Positioned(
+                            bottom: 8.0,
+                            right: 8.0,
+                            child: Container(
+                              padding: const EdgeInsets.all(8.0),
+                              decoration: BoxDecoration(
+                                color: Colors.white.withOpacity(0.5),
+                                borderRadius: BorderRadius.circular(12.0),
+                              ),
+                              child: Text('${controller.currentPageIndex + 1}/${product.imageUrls.length}'),
+                            ),
+                          )
+                        ],
+                      ),
 
-              // title
-              const SizedBox(height: 16.0),
-              Text(
-                "Product Title",
-                style: Theme.of(context).textTheme.headline5,
-              ),
+                      // title
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          product.title,
+                          maxLines: null,
+                          style: Theme.of(context).textTheme.headline5,
+                        ),
+                      ),
 
-              // price
-              const SizedBox(height: 8.0),
-              Text(
-                "00.00",
-                style: Theme.of(context).textTheme.headline6,
-              ),
+                      // price
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          '${product.price}',
+                          style: Theme.of(context).textTheme.headline6!.copyWith(color: Theme.of(context).primaryColor),
+                        ),
+                      ),
 
-              // description
-              const SizedBox(height: 8.0),
-              Text(
-                "Nostrud id aute consequat veniam proident adipisicing quis fugiat voluptate esse mollit ex deserunt. Consectetur dolor velit duis enim id sint fugiat eu duis aute. Fugiat et aliquip culpa labore quis excepteur adipisicing. Nulla anim consequat sint consectetur duis occaecat proident ipsum enim labore eu ex sint nisi. Officia est quis eiusmod elit Lorem magna laboris est exercitation consectetur mollit dolor tempor. Ullamco Lorem non sunt reprehenderit laborum enim cillum sunt pariatur. Ipsum incididunt eu ex magna veniam Lorem culpa enim voluptate occaecat duis voluptate exercitation est."
-                    .replaceAll(". ", "\n"),
-              ),
-            ],
-          );
-        }),
-      ),
-    );
+                      // description
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(product.description),
+                      ),
+                    ],
+                  );
+                }),
+              );
+            }),
+        bottomNavigationBar: Container(
+          padding: const EdgeInsets.all(8.0),
+          width: MediaQuery.of(context).size.width,
+          child: ElevatedButton.icon(
+            onPressed: () {
+              // add to cart
+              log('add to cart');
+            },
+            icon: const Icon(Icons.add_shopping_cart),
+            label: const Text('Add to cart'),
+          ),
+        ));
   }
 }

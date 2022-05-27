@@ -49,7 +49,8 @@ class ProductItem extends StatelessWidget {
                 ),
                 child: Text(
                   title,
-                  maxLines: 3,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                   style: const TextStyle(
                     fontWeight: FontWeight.w600,
                   ),
@@ -58,9 +59,11 @@ class ProductItem extends StatelessWidget {
 
               // price this should show as currency format
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 8.0),
                 child: Text('$price'),
               ),
+
+              SizedBox(height: 8.0),
             ],
           ),
         ),
