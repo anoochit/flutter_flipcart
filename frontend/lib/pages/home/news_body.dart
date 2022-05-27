@@ -7,7 +7,7 @@ class NewsBody extends StatelessWidget {
   Widget build(BuildContext context) {
     // show news product shuffle
     return const Center(
-      child: Text("New Product"),
+      child: Text("New Products"),
     );
   }
 }
