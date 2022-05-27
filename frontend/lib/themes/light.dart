@@ -29,9 +29,9 @@ final lightTheme = ThemeData(
     style: ElevatedButton.styleFrom(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(32.0),
-        side: const BorderSide(
-          color: Colors.deepOrange,
-        ),
+        // side: const BorderSide(
+        //   color: Colors.deepOrange,
+        // ),
       ),
     ),
   ),
