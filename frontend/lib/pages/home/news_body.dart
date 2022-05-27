@@ -6,7 +6,7 @@ class NewsBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // show news product shuffle
-    return Center(
+    return const Center(
       child: Text("New Product"),
     );
   }

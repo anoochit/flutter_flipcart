@@ -4,6 +4,7 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:frontend/models/mock_model.dart';
 import 'package:frontend/widgets/product_item.dart';
+import 'package:get/get.dart';
 
 class HomeBody extends StatelessWidget {
   const HomeBody({Key? key}) : super(key: key);
@@ -21,9 +22,9 @@ class HomeBody extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               // category
-              SizedBox(
+              Container(
                 width: constraints.maxWidth,
-                height: (160 - 16 - 16),
+                height: (120),
                 child: ListView(
                   scrollDirection: Axis.horizontal,
                   children: listCategory
@@ -84,6 +85,8 @@ class HomeBody extends StatelessWidget {
                           onTap: () {
                             // open product detail page
                             log('open product id = ${listProduct[index].id}');
+
+                            Get.toNamed('/product_detail', arguments: listProduct[index]);
                           },
                         ),
                       );

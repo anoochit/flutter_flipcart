@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/pages/cart/cart.dart';
+import 'package:frontend/pages/product/product_detail.dart';
 import 'package:frontend/themes/dark.dart';
 import 'package:frontend/themes/light.dart';
 import 'package:get/get.dart';
@@ -41,6 +42,10 @@ class MyApp extends StatelessWidget {
         GetPage(
           name: '/signin',
           page: () => SignInPage(),
+        ),
+        GetPage(
+          name: '/product_detail',
+          page: () => ProductDetailPage(),
         ),
       ],
     );
