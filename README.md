@@ -40,10 +40,17 @@ Use a proxy address as your endpoint in the mobile application.
 
 Please see more detail at [Strapi documementation](https://docs.strapi.io/developer-docs/latest/setup-deployment-guides/deployment.html)
 
-## Screenshots
+## Mobile App Mockup UI Screenshots
 
 | ![](/screenshots/Screenshot_1653651251.png) | ![](/screenshots/Screenshot_1653651254.png) |
 | ------------------------------------------- | ------------------------------------------- |
 | ![](/screenshots/Screenshot_1653651259.png) | ![](/screenshots/Screenshot_1653651261.png) |
 | ![](/screenshots/Screenshot_1653651264.png) | ![](/screenshots/Screenshot_1653651266.png) |
 | ![](/screenshots/Screenshot_1653651269.png) | ![](/screenshots/Screenshot_1653651275.png) |
+
+## Strapi Content type
+
+| ![](/screenshots/Screenshot-2022-05-27-184332.png) | ![](/screenshots/Screenshot-2022-05-27-184407.png) |
+| -------------------------------------------------- | -------------------------------------------------- |
+| ![](/screenshots/Screenshot-2022-05-27-184437.png) | ![](/screenshots/Screenshot-2022-05-27-184510.png) |
+| ![](/screenshots/Screenshot-2022-05-27-184545.png) |                                                    |
