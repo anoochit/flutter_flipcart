@@ -24,6 +24,7 @@ class CartPage extends StatelessWidget {
                 // get product info
                 final cartItem = controller.shopingCartItems[index];
                 final product = listProduct.where((element) => element.id == cartItem.productId).first;
+
                 // show product item in cart
                 return Column(
                   children: [
@@ -80,34 +81,36 @@ class CartPage extends StatelessWidget {
                 );
               },
             ),
-            bottomNavigationBar: Container(
-              padding: EdgeInsets.all(8.0),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  // total
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 16.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            bottomNavigationBar: (controller.shopingCartItems.isNotEmpty)
+                ? Container(
+                    padding: EdgeInsets.all(8.0),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
                       children: [
-                        const Text('Total'),
-                        Text(
-                            '${controller.shopingCartItems.map((element) => element.price * element.quantity).reduce((value, element) => value + element)}'),
+                        // total
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 8.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              const Text('Total price'),
+                              Text(
+                                  '${controller.shopingCartItems.map((element) => element.price * element.quantity).reduce((value, element) => value + element)}'),
+                            ],
+                          ),
+                        ),
+                        // checkout button
+                        Container(
+                          width: MediaQuery.of(context).size.width,
+                          child: ElevatedButton(
+                            onPressed: () {},
+                            child: const Text("Proceed to Checkout"),
+                          ),
+                        ),
                       ],
                     ),
-                  ),
-                  // checkout button
-                  Container(
-                    width: MediaQuery.of(context).size.width,
-                    child: ElevatedButton(
-                      onPressed: () {},
-                      child: const Text("Proceed to Checkout"),
-                    ),
-                  ),
-                ],
-              ),
-            ),
+                  )
+                : Container(),
           );
         });
   }

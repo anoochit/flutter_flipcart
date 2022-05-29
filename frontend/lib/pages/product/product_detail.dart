@@ -8,6 +8,7 @@ import 'package:frontend/models/shopping_cart_items_model.dart';
 import 'package:get/get.dart';
 
 import '../../models/mock_model.dart';
+import '../../widgets/cart_iconbutton_widget.dart';
 
 class ProductDetailPage extends StatelessWidget {
   ProductDetailPage({Key? key}) : super(key: key);
@@ -27,6 +28,9 @@ class ProductDetailPage extends StatelessWidget {
             statusBarColor: Colors.transparent,
             statusBarIconBrightness: Brightness.dark,
           ),
+          actions: const [
+            CartIconButton(),
+          ],
         ),
         body: GetBuilder<ProductController>(
             init: ProductController(),
@@ -107,7 +111,6 @@ class ProductDetailPage extends StatelessWidget {
               log('add to cart');
               appController.addToCart(
                   item: ShoppingCartItems(productId: product.id, quantity: 1, price: product.price));
-              Get.snackbar("Cart", "Added to cart");
             },
             icon: const Icon(Icons.add_shopping_cart),
             label: const Text('Add to cart'),

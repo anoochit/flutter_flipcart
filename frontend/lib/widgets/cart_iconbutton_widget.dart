@@ -25,13 +25,21 @@ class CartIconButton extends StatelessWidget {
                     decoration: BoxDecoration(
                       color: Colors.amber.shade200,
                     ),
-                    child: Text(
-                      ' ${controller.shopingCartItems.length} ',
-                      style: const TextStyle(
-                        fontSize: 10.0,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
+                    child: (controller.shopingCartItems.isNotEmpty)
+                        ? Text(
+                            ' ${controller.shopingCartItems.map((element) => element.quantity).reduce((value, element) => value + element)} ',
+                            style: const TextStyle(
+                              fontSize: 10.0,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          )
+                        : Text(
+                            " 0 ",
+                            style: const TextStyle(
+                              fontSize: 10.0,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
                   ),
                 ),
               ),

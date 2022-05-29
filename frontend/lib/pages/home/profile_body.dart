@@ -55,24 +55,14 @@ class ProfileBody extends StatelessWidget {
                 ListTile(
                   leading: const Icon(Icons.shopping_bag),
                   title: const Text("Your order"),
-                  onTap: () => Get.snackbar(
-                    "Message",
-                    "not implement",
-                    snackPosition: SnackPosition.TOP,
-                    duration: const Duration(seconds: 1),
-                  ),
+                  onTap: () {},
                 ),
 
                 // payment method
                 ListTile(
                   leading: const Icon(Icons.payment),
                   title: const Text("Payment"),
-                  onTap: () => Get.snackbar(
-                    "Message",
-                    "not implement",
-                    snackPosition: SnackPosition.TOP,
-                    duration: const Duration(seconds: 1),
-                  ),
+                  onTap: () {},
                 ),
 
                 // signout

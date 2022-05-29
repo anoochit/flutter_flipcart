@@ -30,6 +30,7 @@ class MyApp extends StatelessWidget {
         GetPage(
           name: '/',
           page: () => const HomePage(),
+          binding: RootBinding(),
         ),
         GetPage(
           name: '/cart',

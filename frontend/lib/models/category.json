@@ -1,0 +1,16 @@
+[
+  {
+    "id": 1,
+    "attributes": {
+      "title": "แบตสำรอง",
+      "image": {
+        "data": {
+          "id": 5,
+          "attributes": {
+            "url": "/uploads/93d2ce9a_542c_4721_b021_ec566f9afe6b_4603bd0f21.jpg"
+          }
+        }
+      }
+    }
+  }
+]
