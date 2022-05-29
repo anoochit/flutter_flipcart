@@ -2,7 +2,9 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:frontend/controllers/app_controller.dart';
 import 'package:frontend/controllers/product_controller.dart';
+import 'package:frontend/models/shopping_cart_items_model.dart';
 import 'package:get/get.dart';
 
 import '../../models/mock_model.dart';
@@ -11,6 +13,7 @@ class ProductDetailPage extends StatelessWidget {
   ProductDetailPage({Key? key}) : super(key: key);
 
   final product = Get.arguments as Product;
+  final appController = Get.find<AppController>();
 
   @override
   Widget build(BuildContext context) {
@@ -102,6 +105,9 @@ class ProductDetailPage extends StatelessWidget {
             onPressed: () {
               // add to cart
               log('add to cart');
+              appController.addToCart(
+                  item: ShoppingCartItems(productId: product.id, quantity: 1, price: product.price));
+              Get.snackbar("Cart", "Added to cart");
             },
             icon: const Icon(Icons.add_shopping_cart),
             label: const Text('Add to cart'),
