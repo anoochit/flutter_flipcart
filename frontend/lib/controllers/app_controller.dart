@@ -53,6 +53,7 @@ class AppController extends GetxController {
     update();
   }
 
+  // update quantity
   updateQuantity({required ShoppingCartItems item, required int quantity}) {
     // update quantity
     if (quantity == 0) {

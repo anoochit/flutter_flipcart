@@ -15,7 +15,8 @@
     "items": {
       "type": "component",
       "repeatable": true,
-      "component": "order-item.order-item"
+      "component": "order-item.order-item",
+      "required": true
     },
     "user": {
       "type": "relation",
