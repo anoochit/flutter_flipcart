@@ -13,15 +13,19 @@ class ApiService {
   static Future<List<product.Product>?> fetchProducts() async {
     final headers = {'Content-Type': 'application/json', 'Accept': 'application/json'};
 
-    var response = await client.get(
-      Uri.parse("$endPoint/api/products?populate=%2A"),
-      headers: headers,
-    );
-    if (response.statusCode == 200) {
-      final json = jsonDecode(response.body);
-      final jsonString = jsonEncode(json['data']);
-      return product.productFromJson(jsonString);
-    } else {
+    try {
+      var response = await client.get(
+        Uri.parse("$endPoint/api/products?populate=%2A"),
+        headers: headers,
+      );
+      if (response.statusCode == 200) {
+        final json = jsonDecode(response.body);
+        final jsonString = jsonEncode(json['data']);
+        return product.productFromJson(jsonString);
+      } else {
+        return null;
+      }
+    } catch (e) {
       return null;
     }
   }
@@ -29,15 +33,19 @@ class ApiService {
   static Future<List<category.Category>?> fetchCategories() async {
     final headers = {'Content-Type': 'application/json', 'Accept': 'application/json'};
 
-    var response = await client.get(
-      Uri.parse("$endPoint/api/categories?populate=%2A"),
-      headers: headers,
-    );
-    if (response.statusCode == 200) {
-      final json = jsonDecode(response.body);
-      final jsonString = jsonEncode(json['data']);
-      return category.categoryFromJson(jsonString);
-    } else {
+    try {
+      var response = await client.get(
+        Uri.parse("$endPoint/api/categories?populate=%2A"),
+        headers: headers,
+      );
+      if (response.statusCode == 200) {
+        final json = jsonDecode(response.body);
+        final jsonString = jsonEncode(json['data']);
+        return category.categoryFromJson(jsonString);
+      } else {
+        return null;
+      }
+    } catch (e) {
       return null;
     }
   }
