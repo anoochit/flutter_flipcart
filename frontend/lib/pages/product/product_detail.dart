@@ -5,9 +5,10 @@ import 'package:flutter/services.dart';
 import 'package:frontend/controllers/app_controller.dart';
 import 'package:frontend/controllers/product_controller.dart';
 import 'package:frontend/models/shopping_cart_items_model.dart';
+import 'package:frontend/services/api_service.dart';
 import 'package:get/get.dart';
 
-import '../../models/mock_model.dart';
+import '../../models/product.dart';
 import '../../widgets/cart_iconbutton_widget.dart';
 
 class ProductDetailPage extends StatelessWidget {
@@ -24,6 +25,7 @@ class ProductDetailPage extends StatelessWidget {
       // show appbar
       appBar: AppBar(
         backgroundColor: Colors.transparent,
+        iconTheme: IconThemeData(color: Theme.of(context).primaryColor),
         systemOverlayStyle: const SystemUiOverlayStyle(
           statusBarColor: Colors.transparent,
           statusBarIconBrightness: Brightness.dark,
@@ -52,9 +54,12 @@ class ProductDetailPage extends StatelessWidget {
                               controller.update();
                             }),
                             scrollDirection: Axis.horizontal,
-                            itemCount: product.imageUrls.length,
+                            itemCount: product.attributes.images.data.length,
                             itemBuilder: (context, index) {
-                              return Image.network(product.imageUrls[index]);
+                              return Image.network(
+                                ApiService.endPoint + product.attributes.images.data[index].attributes.url,
+                                fit: BoxFit.cover,
+                              );
                             },
                           ),
                         ),
@@ -64,10 +69,10 @@ class ProductDetailPage extends StatelessWidget {
                           child: Container(
                             padding: const EdgeInsets.all(8.0),
                             decoration: BoxDecoration(
-                              color: Colors.white.withOpacity(0.5),
+                              color: Colors.grey.withOpacity(0.5),
                               borderRadius: BorderRadius.circular(12.0),
                             ),
-                            child: Text('${controller.currentPageIndex + 1}/${product.imageUrls.length}'),
+                            child: Text('${controller.currentPageIndex + 1}/${product.attributes.images.data.length}'),
                           ),
                         )
                       ],
@@ -78,7 +83,7 @@ class ProductDetailPage extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
-                        product.title,
+                        product.attributes.title,
                         maxLines: null,
                         style: Theme.of(context).textTheme.headline5,
                       ),
@@ -89,15 +94,17 @@ class ProductDetailPage extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
-                        '${product.price}',
-                        style: Theme.of(context).textTheme.headline6!.copyWith(color: Theme.of(context).primaryColor),
+                        '${product.attributes.price}',
+                        style: Theme.of(context).textTheme.headline6!.copyWith(
+                              color: Theme.of(context).primaryColor,
+                            ),
                       ),
                     ),
 
                     // description
                     Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Text(product.description),
+                      child: Text(product.attributes.description),
                     ),
                   ],
                 );
@@ -111,7 +118,13 @@ class ProductDetailPage extends StatelessWidget {
           onPressed: () {
             // add to cart
             log('add to cart');
-            appController.addToCart(item: ShoppingCartItems(productId: product.id, quantity: 1, price: product.price));
+            appController.addToCart(
+              item: ShoppingCartItems(
+                productId: product.id,
+                quantity: 1,
+                price: double.parse('${product.attributes.price}'),
+              ),
+            );
           },
           icon: const Icon(Icons.add_shopping_cart),
           label: const Text('Add to cart'),

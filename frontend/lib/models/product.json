@@ -5,23 +5,25 @@
       "title": "แบตสำรอง Eloop Orsen EW50 4200mAh Wireless Charger ชาร์จไร้สาย 15W",
       "description": "แบตสำรอง Eloop Orsen EW50 4200mAh Wireless Charger ชาร์จไร้สาย 15W\n\nคุณสมบัติ\n\nแบตเตอรี่สำรอง ความจุ 4200 mAh\nดีไซน์ขนาดเล็ก บางเพียง 1 ซม. เล็กกว่าที่ชาร์จทั่วไป 20%\nระบบแม่เหล็กยึดแน่น ไม่หลุด พกพาได้สะดวกยิ่งขึ้น\nรองรับชาร์จไร้สาย QI Wireless Charge สูงสุด 15W\nออกแบบให้มีช่องว่าง สำหรับระบายความร้อนได้ดียิ่งขึ้น\nมีไฟ LED แสดงสถานะการทำงานและปริมาณความจุของแบตเตอรี่สำรอง\nได้รับมาตรฐานสากล CE, FCC, RoHS, มอก.",
       "price": 1190,
+
       "images": {
         "data": [
           {
-            "id": 5,
             "attributes": {
               "url": "/uploads/93d2ce9a_542c_4721_b021_ec566f9afe6b_4603bd0f21.jpg"
             }
           }
         ]
       },
-      "category": {
-        "data": {
-          "id": 1,
-          "attributes": {
-            "title": "แบตสำรอง"
+      "categories": {
+        "data": [
+          {
+            "id": 1,
+            "attributes": {
+              "title": "แบตสำรอง"
+            }
           }
-        }
+        ]
       }
     }
   }

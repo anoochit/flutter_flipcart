@@ -16,5 +16,6 @@ class CategoryController extends GetxController {
   fetchCategories() async {
     listCategory.value = (await ApiService.fetchCategories()) ?? [];
     log('total category = ${listCategory.length}');
+    update();
   }
 }

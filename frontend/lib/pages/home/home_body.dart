@@ -1,8 +1,9 @@
 import 'dart:developer';
-import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
-import 'package:frontend/models/mock_model.dart';
+import 'package:frontend/controllers/category_controller.dart';
+import 'package:frontend/controllers/product_controller.dart';
+import 'package:frontend/services/api_service.dart';
 import 'package:frontend/widgets/product_item.dart';
 import 'package:get/get.dart';
 
@@ -26,37 +27,49 @@ class HomeBody extends StatelessWidget {
               SizedBox(
                 width: constraints.maxWidth,
                 height: (120),
-                child: ListView(
-                  scrollDirection: Axis.horizontal,
-                  children: listCategory
-                      .map((e) => Container(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 8.0,
-                              vertical: 4.0,
+                child: GetBuilder<CategoryController>(builder: (CategoryController controller) {
+                  final listCategory = controller.listCategory;
+                  return ListView.builder(
+                    itemCount: listCategory.length,
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (context, index) {
+                      // list category item
+                      return Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 8.0,
+                          vertical: 4.0,
+                        ),
+                        width: constraints.maxWidth * 0.25,
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            // image
+                            ClipOval(
+                              child: Image.network(
+                                ApiService.endPoint + listCategory[index].attributes.image.data.attributes.url,
+                                fit: BoxFit.cover,
+                              ),
                             ),
-                            width: constraints.maxWidth * 0.25,
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                // image
-                                ClipOval(
-                                  child: Image.network(
-                                    e.imageUrl,
-                                    fit: BoxFit.cover,
-                                  ),
+                            // title
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                vertical: 4.0,
+                              ),
+                              child: Text(
+                                listCategory[index].attributes.title,
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
                                 ),
-                                // title
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                    vertical: 4.0,
-                                  ),
-                                  child: Text(e.title),
-                                ),
-                              ],
+                              ),
                             ),
-                          ))
-                      .toList(),
-                ),
+                          ],
+                        ),
+                      );
+                    },
+                  );
+                }),
               ),
 
               // show banner
@@ -66,33 +79,31 @@ class HomeBody extends StatelessWidget {
               // show shuffle lastest 10 products here
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 4.0),
-                child: Wrap(
-                  children: List.generate(
-                    10,
-                    (value) {
-                      // random product index
-                      int index = math.Random().nextInt(listProduct.length);
+                child: GetBuilder<ProductController>(
+                  builder: (controller) {
+                    final listProduct = controller.listProduct;
+                    return Wrap(
+                      children: listProduct.map((product) {
+                        return SizedBox(
+                          width: constraints.maxWidth * 0.5 - 4,
+                          child: ProductItem(
+                            productId: product.id,
+                            title: product.attributes.title,
+                            description: product.attributes.description,
+                            categoryId: product.attributes.categories.data.first.id,
+                            imageUrl: ApiService.endPoint + product.attributes.images.data.first.attributes.url,
+                            price: product.attributes.price,
+                            onTap: () {
+                              // open product detail page
+                              log('open product id = ${product.id}');
 
-                      // show product widget here
-                      return SizedBox(
-                        width: constraints.maxWidth * 0.5 - 4,
-                        child: ProductItem(
-                          productId: listProduct[index].id,
-                          title: listProduct[index].title,
-                          description: listProduct[index].description,
-                          categoryId: listProduct[index].categoryId,
-                          imageUrl: listProduct[index].imageUrls,
-                          price: listProduct[index].price,
-                          onTap: () {
-                            // open product detail page
-                            log('open product id = ${listProduct[index].id}');
-
-                            Get.toNamed('/product_detail', arguments: listProduct[index]);
-                          },
-                        ),
-                      );
-                    },
-                  ).toList(),
+                              Get.toNamed('/product_detail', arguments: product);
+                            },
+                          ),
+                        );
+                      }).toList(),
+                    );
+                  },
                 ),
               )
 

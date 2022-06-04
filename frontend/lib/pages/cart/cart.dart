@@ -2,11 +2,14 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:frontend/controllers/app_controller.dart';
-import 'package:frontend/models/mock_model.dart';
+import 'package:frontend/controllers/product_controller.dart';
+import 'package:frontend/services/api_service.dart';
 import 'package:get/get.dart';
 
 class CartPage extends StatelessWidget {
-  const CartPage({Key? key}) : super(key: key);
+  CartPage({Key? key}) : super(key: key);
+
+  final ProductController productController = Get.find<ProductController>();
 
   @override
   Widget build(BuildContext context) {
@@ -23,6 +26,9 @@ class CartPage extends StatelessWidget {
               itemBuilder: (BuildContext context, int index) {
                 // get product info
                 final cartItem = controller.shopingCartItems[index];
+
+                // product item
+                final listProduct = productController.listProduct;
                 final product = listProduct.where((element) => element.id == cartItem.productId).first;
 
                 // show product item in cart
@@ -33,43 +39,52 @@ class CartPage extends StatelessWidget {
                       children: [
                         // show image
                         Image.network(
-                          product.imageUrls.first,
+                          ApiService.endPoint + product.attributes.images.data.first.attributes.url,
                           width: 120,
                           height: 120,
                         ),
                         // poduct info
                         SizedBox(
                           height: 120,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              // title
-                              Text(
-                                '${product.title}',
-                                style: const TextStyle(fontWeight: FontWeight.bold),
-                              ),
-                              // price
-                              Text('${cartItem.price}'),
-                              // quantity
-                              Row(
-                                children: [
-                                  IconButton(
-                                      onPressed: () {
-                                        // update quantity in cart
-                                        controller.updateQuantity(item: cartItem, quantity: (cartItem.quantity - 1));
-                                      },
-                                      icon: const Icon(Icons.remove)),
-                                  Text('${cartItem.quantity}'),
-                                  IconButton(
-                                      onPressed: () {
-                                        // update quantity in cart
-                                        controller.updateQuantity(item: cartItem, quantity: cartItem.quantity + 1);
-                                      },
-                                      icon: const Icon(Icons.add)),
-                                ],
-                              ),
-                            ],
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                // title
+                                SizedBox(
+                                  width: MediaQuery.of(context).size.width - 120 - 16,
+                                  child: Text(
+                                    '${product.attributes.title}',
+                                    maxLines: 2,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: const TextStyle(fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+
+                                // price
+                                Text('${cartItem.price}'),
+                                // quantity
+                                Row(
+                                  children: [
+                                    IconButton(
+                                        onPressed: () {
+                                          // update quantity in cart
+                                          controller.updateQuantity(item: cartItem, quantity: (cartItem.quantity - 1));
+                                        },
+                                        icon: const Icon(Icons.remove)),
+                                    Text('${cartItem.quantity}'),
+                                    IconButton(
+                                        onPressed: () {
+                                          // update quantity in cart
+                                          controller.updateQuantity(item: cartItem, quantity: cartItem.quantity + 1);
+                                        },
+                                        icon: const Icon(Icons.add)),
+                                  ],
+                                ),
+                              ],
+                            ),
                           ),
                         )
                       ],

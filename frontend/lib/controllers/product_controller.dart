@@ -17,5 +17,6 @@ class ProductController extends GetxController {
   fetchProducts() async {
     listProduct.value = (await ApiService.fetchProducts()) ?? [];
     log('total products = ${listProduct.length}');
+    update();
   }
 }

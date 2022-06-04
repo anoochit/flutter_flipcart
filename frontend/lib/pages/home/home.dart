@@ -23,7 +23,7 @@ class HomePage extends StatelessWidget {
                 actions: [
                   // if loged in, we can add the cart icon here
                   // if not login show login button here
-                  (controller.isLogin.isTrue) ? const CartIconButton() : const SignInIconButton()
+                  const CartIconButton()
                 ],
               ),
               // body content

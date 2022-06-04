@@ -16,8 +16,8 @@ class ProductItem extends StatelessWidget {
   final String title;
   final String description;
   final int categoryId;
-  final List<String> imageUrl;
-  final double price;
+  final String imageUrl;
+  final int price;
   final VoidCallback onTap;
 
   @override
@@ -35,7 +35,7 @@ class ProductItem extends StatelessWidget {
             children: [
               // image
               Image.network(
-                imageUrl.first,
+                imageUrl,
                 width: constraints.maxWidth,
                 height: constraints.maxWidth,
                 fit: BoxFit.fill,
@@ -60,7 +60,12 @@ class ProductItem extends StatelessWidget {
               // price this should show as currency format
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 8.0),
-                child: Text('$price'),
+                child: Text(
+                  '$price',
+                  style: Theme.of(context).textTheme.bodyText2!.copyWith(
+                        color: Theme.of(context).primaryColor,
+                      ),
+                ),
               ),
 
               SizedBox(height: 8.0),
