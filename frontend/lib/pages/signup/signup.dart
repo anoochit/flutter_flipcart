@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/controllers/app_controller.dart';
+import 'package:frontend/controllers/auth_controller.dart';
 import 'package:get/get.dart';
 
 import '../../themes/theme.dart';
@@ -9,7 +9,11 @@ class SignUpPage extends StatelessWidget {
 
   final formKey = GlobalKey<FormState>();
 
-  final controller = Get.find<AppController>();
+  final controller = Get.find<AuthController>();
+
+  TextEditingController textNameController = TextEditingController();
+  TextEditingController textUserController = TextEditingController();
+  TextEditingController textPasswordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -29,6 +33,7 @@ class SignUpPage extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.all(4.0),
                   child: TextFormField(
+                    controller: textNameController,
                     decoration: InputDecoration(
                       border: kTextInputOutline,
                       prefixIcon: const Icon(Icons.account_circle),
@@ -39,6 +44,7 @@ class SignUpPage extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.all(4.0),
                   child: TextFormField(
+                    controller: textUserController,
                     decoration: InputDecoration(
                       border: kTextInputOutline,
                       prefixIcon: const Icon(Icons.email),
@@ -49,6 +55,7 @@ class SignUpPage extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.all(4.0),
                   child: TextFormField(
+                    controller: textPasswordController,
                     decoration: InputDecoration(
                       border: kTextInputOutline,
                       prefixIcon: const Icon(Icons.password),
@@ -63,7 +70,20 @@ class SignUpPage extends StatelessWidget {
                     height: 56,
                     child: ElevatedButton(
                       // TODO : signup process
-                      onPressed: () => controller.mockSignUp(),
+                      onPressed: () {
+                        // signup
+                        controller
+                            .signUp(
+                          name: textNameController.text.trim(),
+                          email: textUserController.text.trim(),
+                          password: textPasswordController.text.trim(),
+                        )
+                            .then((user) {
+                          if (user != null) {
+                            Get.offAllNamed('/');
+                          }
+                        });
+                      },
                       child: const Text("Sign Up"),
                     ),
                   ),

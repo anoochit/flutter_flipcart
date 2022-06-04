@@ -1,4 +1,5 @@
 import 'package:frontend/controllers/app_controller.dart';
+import 'package:frontend/controllers/auth_controller.dart';
 import 'package:frontend/controllers/category_controller.dart';
 import 'package:frontend/controllers/product_controller.dart';
 import 'package:get/get.dart';
@@ -9,5 +10,6 @@ class RootBinding implements Bindings {
     Get.put(AppController());
     Get.put(CategoryController());
     Get.put(ProductController());
+    Get.put(AuthController());
   }
 }

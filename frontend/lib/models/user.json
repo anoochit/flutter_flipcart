@@ -1,0 +1,13 @@
+{
+  "jwt": "AvXntGrO-aI7BCESIFqvBksDJe7cAJA5scoBwBdzWi0",
+  "user": {
+    "id": 1,
+    "username": "demo",
+    "email": "demo@example.com",
+    "provider": "local",
+    "confirmed": true,
+    "blocked": false,
+    "createdAt": "2022-05-25T04:37:02.589Z",
+    "updatedAt": "2022-05-25T05:42:07.834Z"
+  }
+}

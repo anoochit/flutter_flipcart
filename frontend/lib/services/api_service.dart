@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
 
+import 'package:frontend/models/user.dart';
 import 'package:http/http.dart' as http;
 
 import '../models/category.dart' as category;
@@ -14,7 +15,7 @@ class ApiService {
     final headers = {'Content-Type': 'application/json', 'Accept': 'application/json'};
 
     try {
-      var response = await client.get(
+      final response = await client.get(
         Uri.parse("$endPoint/api/products?populate=images,categories"),
         headers: headers,
       );
@@ -34,7 +35,7 @@ class ApiService {
     final headers = {'Content-Type': 'application/json', 'Accept': 'application/json'};
 
     try {
-      var response = await client.get(
+      final response = await client.get(
         Uri.parse("$endPoint/api/categories?populate=image"),
         headers: headers,
       );
@@ -42,6 +43,55 @@ class ApiService {
         final json = jsonDecode(response.body);
         final jsonString = jsonEncode(json['data']);
         return category.categoryFromJson(jsonString);
+      } else {
+        return null;
+      }
+    } catch (e) {
+      return null;
+    }
+  }
+
+  static Future<User?> signIn({required String email, required String password}) async {
+    final headers = {'Content-Type': 'application/json', 'Accept': 'application/json'};
+
+    try {
+      final response = await http.post(
+        Uri.parse("$endPoint/api/auth/local"),
+        headers: headers,
+        body: jsonEncode({
+          'identifier': email,
+          'password': password,
+        }),
+      );
+
+      if (response.statusCode == 200) {
+        final user = userFromJson(response.body);
+        return user;
+      } else {
+        return null;
+      }
+    } catch (e) {
+      return null;
+    }
+  }
+
+  static Future<User?> signUp({required String name, required String email, required String password}) async {
+    final headers = {'Content-Type': 'application/json', 'Accept': 'application/json'};
+
+    try {
+      final response = await http.post(
+        Uri.parse("$endPoint/api/auth/local/register"),
+        headers: headers,
+        body: jsonEncode({
+          'username': name,
+          'email': email,
+          'password': password,
+        }),
+      );
+
+      if (response.statusCode == 200) {
+        final user = userFromJson(response.body);
+        return user;
       } else {
         return null;
       }
