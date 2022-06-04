@@ -42,11 +42,12 @@ Please see more detail at [Strapi documementation](https://docs.strapi.io/develo
 
 ## Mobile App Mockup UI Screenshots
 
-| ![](/screenshots/Screenshot_1653651251.png) | ![](/screenshots/Screenshot_1653651254.png) |
+| ![](/screenshots/Screenshot_1654327909.png) | ![](/screenshots/Screenshot_1654327913.png) |
 | ------------------------------------------- | ------------------------------------------- |
 | ![](/screenshots/Screenshot_1653651259.png) | ![](/screenshots/Screenshot_1653651261.png) |
 | ![](/screenshots/Screenshot_1653651264.png) | ![](/screenshots/Screenshot_1653651266.png) |
 | ![](/screenshots/Screenshot_1653651269.png) | ![](/screenshots/Screenshot_1653651275.png) |
+| ![](/screenshots/Screenshot_1654327955.png) |                                             |
 
 ## Strapi Content type
 
