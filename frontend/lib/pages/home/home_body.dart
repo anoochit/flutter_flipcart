@@ -26,7 +26,7 @@ class HomeBody extends StatelessWidget {
               const SizedBox(height: 8),
               SizedBox(
                 width: constraints.maxWidth,
-                height: (120),
+                height: (128),
                 child: GetBuilder<CategoryController>(builder: (CategoryController controller) {
                   final listCategory = controller.listCategory;
                   return ListView.builder(
