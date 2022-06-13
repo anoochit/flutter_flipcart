@@ -12,15 +12,6 @@ class AppController extends GetxController {
     update();
   }
 
-  // Mackup : process
-  mockSignUp() {
-    // Mockup : process
-    //isLogin.value = true;
-    // userName.value = "User Name";
-    update();
-    Get.offAllNamed('/');
-  }
-
   // add to cart
   addToCart({required ShoppingCartItems item}) {
     // check if item already in cart

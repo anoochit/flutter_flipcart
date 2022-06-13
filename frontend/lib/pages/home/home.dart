@@ -1,14 +1,9 @@
-import 'dart:convert';
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:frontend/controllers/app_controller.dart';
-import 'package:frontend/models/product.dart';
 import 'package:frontend/pages/home/home_body.dart';
 import 'package:frontend/pages/home/news_body.dart';
 import 'package:frontend/pages/home/notifications_body.dart';
 import 'package:frontend/pages/home/profile_body.dart';
-import 'package:frontend/services/api_provider.dart';
 import 'package:frontend/widgets/cart_iconbutton_widget.dart';
 import 'package:get/get.dart';
 

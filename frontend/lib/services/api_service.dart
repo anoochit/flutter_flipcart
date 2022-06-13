@@ -11,6 +11,7 @@ class ApiService {
   static final client = http.Client();
   static const endPoint = "http://10.0.2.2:1337";
 
+  // get products
   static Future<List<product.Product>?> fetchProducts() async {
     final headers = {'Content-Type': 'application/json', 'Accept': 'application/json'};
 
@@ -31,6 +32,7 @@ class ApiService {
     }
   }
 
+  // get categories
   static Future<List<category.Category>?> fetchCategories() async {
     final headers = {'Content-Type': 'application/json', 'Accept': 'application/json'};
 
@@ -51,6 +53,7 @@ class ApiService {
     }
   }
 
+  // sign in
   static Future<User?> signIn({required String email, required String password}) async {
     final headers = {'Content-Type': 'application/json', 'Accept': 'application/json'};
 
@@ -75,6 +78,7 @@ class ApiService {
     }
   }
 
+  // sign up
   static Future<User?> signUp({required String name, required String email, required String password}) async {
     final headers = {'Content-Type': 'application/json', 'Accept': 'application/json'};
 

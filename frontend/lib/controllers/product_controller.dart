@@ -5,7 +5,6 @@ import '../models/product.dart';
 import '../services/api_service.dart';
 
 class ProductController extends GetxController {
-  int currentPageIndex = 0;
   RxList<Product> listProduct = RxList<Product>();
 
   @override

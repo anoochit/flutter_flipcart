@@ -43,39 +43,35 @@ class ProductDetailPage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     // show image in page view
-                    Stack(
-                      children: [
-                        SizedBox(
-                          width: constraints.maxWidth,
-                          height: constraints.maxWidth,
-                          child: PageView.builder(
-                            onPageChanged: ((value) {
-                              controller.currentPageIndex = value;
-                              controller.update();
-                            }),
-                            scrollDirection: Axis.horizontal,
-                            itemCount: product.attributes.images.data.length,
-                            itemBuilder: (context, index) {
-                              return Image.network(
-                                ApiService.endPoint + product.attributes.images.data[index].attributes.url,
+                    SizedBox(
+                      width: constraints.maxWidth,
+                      height: constraints.maxWidth,
+                      child: PageView(
+                        scrollDirection: Axis.horizontal,
+                        children: product.attributes.images.data.map((e) {
+                          return Stack(
+                            children: [
+                              Image.network(
+                                ApiService.endPoint + e.attributes.url,
                                 fit: BoxFit.cover,
-                              );
-                            },
-                          ),
-                        ),
-                        Positioned(
-                          bottom: 8.0,
-                          right: 8.0,
-                          child: Container(
-                            padding: const EdgeInsets.all(8.0),
-                            decoration: BoxDecoration(
-                              color: Colors.grey.withOpacity(0.5),
-                              borderRadius: BorderRadius.circular(12.0),
-                            ),
-                            child: Text('${controller.currentPageIndex + 1}/${product.attributes.images.data.length}'),
-                          ),
-                        )
-                      ],
+                              ),
+                              Positioned(
+                                bottom: 8.0,
+                                right: 8.0,
+                                child: Container(
+                                  padding: const EdgeInsets.all(8.0),
+                                  decoration: BoxDecoration(
+                                    color: Colors.grey.withOpacity(0.5),
+                                    borderRadius: BorderRadius.circular(12.0),
+                                  ),
+                                  child: Text(
+                                      '${product.attributes.images.data.indexOf(e) + 1}/${product.attributes.images.data.length}'),
+                                ),
+                              )
+                            ],
+                          );
+                        }).toList(),
+                      ),
                     ),
 
                     // title
