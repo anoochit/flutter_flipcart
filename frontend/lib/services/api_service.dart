@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:developer';
 
 import 'package:frontend/models/user.dart';
 import 'package:http/http.dart' as http;
@@ -8,15 +7,14 @@ import '../models/category.dart' as category;
 import '../models/product.dart' as product;
 
 class ApiService {
-  static final client = http.Client();
   static const endPoint = "http://10.0.2.2:1337";
+
+  static const headers = {'Content-Type': 'application/json', 'Accept': 'application/json'};
 
   // get products
   static Future<List<product.Product>?> fetchProducts() async {
-    final headers = {'Content-Type': 'application/json', 'Accept': 'application/json'};
-
     try {
-      final response = await client.get(
+      final response = await http.get(
         Uri.parse("$endPoint/api/products?populate=images,categories"),
         headers: headers,
       );
@@ -34,10 +32,8 @@ class ApiService {
 
   // get categories
   static Future<List<category.Category>?> fetchCategories() async {
-    final headers = {'Content-Type': 'application/json', 'Accept': 'application/json'};
-
     try {
-      final response = await client.get(
+      final response = await http.get(
         Uri.parse("$endPoint/api/categories?populate=image"),
         headers: headers,
       );
@@ -55,8 +51,6 @@ class ApiService {
 
   // sign in
   static Future<User?> signIn({required String email, required String password}) async {
-    final headers = {'Content-Type': 'application/json', 'Accept': 'application/json'};
-
     try {
       final response = await http.post(
         Uri.parse("$endPoint/api/auth/local"),
@@ -80,8 +74,6 @@ class ApiService {
 
   // sign up
   static Future<User?> signUp({required String name, required String email, required String password}) async {
-    final headers = {'Content-Type': 'application/json', 'Accept': 'application/json'};
-
     try {
       final response = await http.post(
         Uri.parse("$endPoint/api/auth/local/register"),
